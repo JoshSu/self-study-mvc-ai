@@ -8,3 +8,11 @@ docker buildx build --platform linux/amd64 -f ./Dockerfile -t image .
 docker tag image:latest 197877249140.dkr.ecr.us-east-1.amazonaws.com/selfstudyrepo:latest
 #
 docker push 197877249140.dkr.ecr.us-east-1.amazonaws.com/selfstudyrepo:latest
+
+
+
+In Ec2 
+
+docker pull 197877249140.dkr.ecr.us-east-1.amazonaws.com/selfstudyrepo:latest
+
+docker run -d -p 8080:8080 197877249140.dkr.ecr.us-east-1.amazonaws.com/selfstudyrepo:latest
