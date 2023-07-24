@@ -33,9 +33,9 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
-            padding: 50px;
-            height: 70vh; /* Change this value to adjust the height of the hero section */
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* This makes the video take the whole screen */
         }
         .hero video {
             position: absolute;
@@ -55,21 +55,17 @@
 </head>
 <body>
 <nav class="navbar">
-    <a href="#" class="navbar-brand">My Fancy Website</a>
+    <a href="#" class="navbar-brand">Moyi.ai</a>
 </nav>
 <div class="hero">
     <video autoplay loop muted>
-        <source src="https://www.pexels.com/download/video/3196061/" type="video/mp4">
+        <source src="https://www.pexels.com/download/video/5198159/?h=1080&w=1920" type="video/mp4">
     </video>
-    <h1>Welcome to My Fancy Website!</h1>
+    <h1>Change the future of education using AI</h1>
     <p>Creating the future of AI, together.</p>
-</div>
-<div class="content">
-    <h2>Our Mission</h2>
-    <p>
-        We aim to ensure that artificial general intelligence (AGI) benefits all of humanity.
-        We will build safe and beneficial AGI, or help others achieve this outcome.
-    </p>
+    <div>
+        <a href="/hello?name=Test" class="btn btn-primary">Try it out</a>
+    </div>
 </div>
 </body>
 </html>
