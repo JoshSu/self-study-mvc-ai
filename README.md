@@ -24,3 +24,5 @@ http://localhost:8080/self-study-mvc-ai/hello
 http://54.172.58.126:8080/hello
 
 http://selfstudyai.de:8080/hello?name=cd
+
+http://selfstudyai.de/
