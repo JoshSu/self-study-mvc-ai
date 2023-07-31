@@ -40,7 +40,7 @@
     </script>
 </head>
 <body>
-<h2>Chat with GPT Bot</h2>
+<h2>Chat with Self-study Bot</h2>
 
 <div id="loader" style="display: none;"></div>
 
