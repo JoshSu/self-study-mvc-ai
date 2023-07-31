@@ -46,6 +46,9 @@ public class OpenAIConfig {
             // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
             throw e;
         }
+
+
+
         JSONObject jsonObject = new JSONObject(getSecretValueResponse.secretString());
         return jsonObject.getString(secretName);
 
