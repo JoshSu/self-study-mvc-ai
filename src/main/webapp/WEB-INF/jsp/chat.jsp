@@ -4,62 +4,88 @@
 <html>
 <head>
     <title>Chat with GPT Bot</title>
+
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <style>
-        /* Center the loader */
-        #loader {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            z-index: 1;
-            width: 150px;
-            height: 150px;
-            margin: -75px 0 0 -75px;
-            border: 16px solid #f3f3f3;
-            border-radius: 50%;
-            border-top: 16px solid #3498db;
-            width: 120px;
-            height: 120px;
-            -webkit-animation: spin 2s linear infinite;
-            animation: spin 2s linear infinite;
+        body {
+            padding: 20px;
         }
 
-        @-webkit-keyframes spin {
-            0% { -webkit-transform: rotate(0deg); }
-            100% { -webkit-transform: rotate(360deg); }
+        #chatArea {
+            height: 400px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            padding: 10px;
+            overflow-y: scroll;
+            margin-bottom: 20px;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .user-message {
+            text-align: right;
+            color: blue;
+        }
+
+        .bot-message {
+            text-align: left;
+            color: green;
         }
     </style>
+
     <script>
+        // show loader
         function showLoader() {
-            document.getElementById('loader').style.display = 'block';
+            var chatArea = $('#chatArea');
+            chatArea.append('<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>');
         }
+
+        // on document ready
+        $(document).ready(function() {
+            // auto-scroll to the bottom
+            function scrollToBottom() {
+                var chatArea = document.getElementById('chatArea');
+                chatArea.scrollTop = chatArea.scrollHeight;
+            }
+
+            // on page load
+            scrollToBottom();
+
+            // listen for changes in the chatArea and scroll to the bottom
+            var chatArea = document.querySelector('#chatArea');
+            var observer = new MutationObserver(scrollToBottom);
+
+            // configuration of the observer:
+            var config = { attributes: true, childList: true, characterData: true, subtree: true };
+            observer.observe(chatArea, config);
+        });
     </script>
+
 </head>
 <body>
-<h2>Chat with Self-study Bot</h2>
-
-<div id="loader" style="display: none;"></div>
-
-<div id="chatArea">
-    <%
-        List<Message> chatHistory = (List<Message>) request.getAttribute("chatHistory");
-        if (chatHistory != null) {
-            for (Message message : chatHistory) {
-                out.println("<p>" + message.getRole() + ": " + message.getContent() + "</p>");
+<div class="container">
+    <h2 class="text-center">Chat with Self-study Bot</h2>
+    <div id="chatArea">
+        <%
+            List<Message> chatHistory = (List<Message>) request.getAttribute("chatHistory");
+            if (chatHistory != null) {
+                for (Message message : chatHistory) {
+                    String cssClass = message.getRole().equals("user") ? "user-message" : "bot-message";
+                    out.println("<p class='" + cssClass + "'>" + message.getRole() + ": " + message.getContent() + "</p>");
+                }
             }
-        }
-    %>
+        %>
+    </div>
+    <form action="/bot/chat" method="get" onsubmit="showLoader()">
+        <div class="form-group">
+            <label for="prompt">Your Message:</label>
+            <input type="text" id="prompt" name="prompt" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </div>
-
-<form action="/bot/chat" method="get" onsubmit="showLoader()">
-    <label for="prompt">Your Message:</label><br>
-    <input type="text" id="prompt" name="prompt"><br>
-    <input type="submit" value="Submit">
-</form>
-
 </body>
 </html>
