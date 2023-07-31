@@ -64,7 +64,7 @@
     <h1>Change the future of education using AI</h1>
     <p>Creating the future of AI, together.</p>
     <div>
-        <a href="/hello?name=Test" class="btn btn-primary">Try it out</a>
+        <a href="/bot/chat" class="btn btn-primary">Try it out</a>
     </div>
 </div>
 </body>
