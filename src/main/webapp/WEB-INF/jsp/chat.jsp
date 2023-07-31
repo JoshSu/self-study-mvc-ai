@@ -1,3 +1,5 @@
+<%@ page import="com.example.selfstudymvcai.dto.Message" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -7,9 +9,14 @@
 <h2>Chat with GPT Bot</h2>
 
 <div id="chatArea">
-    <% if(request.getAttribute("response") != null) { %>
-    <p>Bot: ${response}</p>
-    <% } %>
+    <%
+        List<Message> chatHistory = (List<Message>) request.getAttribute("chatHistory");
+        if (chatHistory != null) {
+            for (Message message : chatHistory) {
+                out.println("<p>" + message.getRole() + ": " + message.getContent() + "</p>");
+            }
+        }
+    %>
 </div>
 
 <form action="/bot/chat" method="get">
